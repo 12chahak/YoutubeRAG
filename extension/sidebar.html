@@ -1,0 +1,71 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     YouTube RAG Sidebar — HTML Fragment
+     Injected into YouTube watch pages by content.js
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<!-- Toggle Button -->
+<button id="ytrag-toggle-btn" title="Open YouTube RAG Chat">🎬</button>
+
+<!-- Sidebar Panel -->
+<div id="ytrag-sidebar">
+
+  <!-- Header -->
+  <div id="ytrag-header">
+    <div id="ytrag-header-title">
+      <span class="ytrag-logo">🎬</span>
+      <h2>YouTube RAG</h2>
+    </div>
+    <p id="ytrag-header-subtitle">AI-Powered Video Q&amp;A</p>
+    <button id="ytrag-close-btn" title="Close sidebar">✕</button>
+  </div>
+
+  <!-- Video Info -->
+  <div id="ytrag-video-info">
+    <div id="ytrag-video-title">
+      <span class="ytrag-label">📹 Current Video</span>
+      <span id="ytrag-title-text">Detecting video…</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <span id="ytrag-status-badge" class="ytrag-badge ytrag-badge-idle">
+        ○ Not indexed
+      </span>
+    </div>
+    <button id="ytrag-index-btn">🚀 Index This Video</button>
+    <div id="ytrag-progress" class="ytrag-progress" style="display: none;">
+      <div id="ytrag-progress-bar" class="ytrag-progress-bar" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <!-- Chat Messages -->
+  <div id="ytrag-messages">
+    <!-- Welcome state (shown when no messages) -->
+    <div id="ytrag-welcome" class="ytrag-welcome">
+      <div class="ytrag-welcome-icon">💬</div>
+      <h3>Ask Anything</h3>
+      <p>
+        Index the video above, then ask any question.<br>
+        Get precise answers with clickable timestamps<br>
+        that jump to the exact moment.
+      </p>
+    </div>
+  </div>
+
+  <!-- Chat Input -->
+  <div id="ytrag-input-area">
+    <div id="ytrag-input-wrapper">
+      <input
+        id="ytrag-chat-input"
+        type="text"
+        placeholder="Ask about this video…"
+        autocomplete="off"
+      />
+      <button id="ytrag-send-btn" title="Send message">➤</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="ytrag-footer">
+    <p>Powered by NVIDIA · Pinecone · Groq</p>
+  </div>
+
+</div>

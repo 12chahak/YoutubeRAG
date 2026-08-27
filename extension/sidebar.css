@@ -1,0 +1,578 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   YouTube RAG Sidebar — Chrome Extension Styles
+   Premium dark glassmorphism theme matching the Streamlit app
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --ytrag-bg-primary:       #0f0f1a;
+  --ytrag-bg-secondary:     #1a1a2e;
+  --ytrag-bg-card:          rgba(255, 255, 255, 0.04);
+  --ytrag-bg-card-hover:    rgba(255, 255, 255, 0.07);
+  --ytrag-border:           rgba(255, 255, 255, 0.08);
+  --ytrag-border-hover:     rgba(124, 58, 237, 0.4);
+  --ytrag-accent-primary:   #7c3aed;
+  --ytrag-accent-secondary: #06b6d4;
+  --ytrag-accent-gradient:  linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  --ytrag-text-primary:     #f1f5f9;
+  --ytrag-text-secondary:   #94a3b8;
+  --ytrag-text-muted:       #64748b;
+  --ytrag-success:          #10b981;
+  --ytrag-warning:          #f59e0b;
+  --ytrag-error:            #ef4444;
+  --ytrag-radius-sm:        8px;
+  --ytrag-radius-md:        12px;
+  --ytrag-radius-lg:        16px;
+  --ytrag-shadow-glow:      0 0 40px rgba(124, 58, 237, 0.12);
+  --ytrag-sidebar-width:    380px;
+}
+
+/* ── Sidebar Container ── */
+#ytrag-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: var(--ytrag-sidebar-width);
+  height: 100vh;
+  background: linear-gradient(180deg, #0f0f1a 0%, #0d1525 50%, #0f0f1a 100%);
+  border-left: 1px solid var(--ytrag-border);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.5), var(--ytrag-shadow-glow);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ytrag-text-primary);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+#ytrag-sidebar.ytrag-open {
+  transform: translateX(0);
+}
+
+/* ── Toggle Button (floating) ── */
+#ytrag-toggle-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ytrag-accent-gradient);
+  border: none;
+  cursor: pointer;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1;
+}
+
+#ytrag-toggle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(124, 58, 237, 0.55), 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+#ytrag-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+/* ── Header ── */
+#ytrag-header {
+  padding: 16px 18px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--ytrag-border);
+  flex-shrink: 0;
+}
+
+#ytrag-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+#ytrag-header-title h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: var(--ytrag-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.3;
+}
+
+#ytrag-header-title .ytrag-logo {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+#ytrag-header-subtitle {
+  font-size: 0.72rem;
+  color: var(--ytrag-text-muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+#ytrag-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--ytrag-border);
+  color: var(--ytrag-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+#ytrag-close-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--ytrag-border-hover);
+  color: var(--ytrag-text-primary);
+}
+
+/* ── Video Info Bar ── */
+#ytrag-video-info {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--ytrag-border);
+  flex-shrink: 0;
+}
+
+#ytrag-video-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ytrag-text-primary);
+  margin: 0 0 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+#ytrag-video-title .ytrag-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ytrag-text-muted);
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* ── Status Badge ── */
+.ytrag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ytrag-badge-idle {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--ytrag-text-muted);
+  border: 1px solid rgba(100, 116, 139, 0.25);
+}
+
+.ytrag-badge-loading {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--ytrag-warning);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.ytrag-badge-success {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--ytrag-success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.ytrag-badge-error {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--ytrag-error);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ── Index Button ── */
+#ytrag-index-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: var(--ytrag-radius-sm);
+  background: var(--ytrag-accent-gradient);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+#ytrag-index-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#ytrag-index-btn:active {
+  transform: translateY(0);
+}
+
+#ytrag-index-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Chat Messages Area ── */
+#ytrag-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+#ytrag-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+#ytrag-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#ytrag-messages::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 3px;
+}
+
+#ytrag-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.55);
+}
+
+/* ── Message Bubbles ── */
+.ytrag-message {
+  max-width: 92%;
+  padding: 10px 14px;
+  border-radius: var(--ytrag-radius-md);
+  font-size: 0.83rem;
+  line-height: 1.55;
+  word-wrap: break-word;
+  animation: ytrag-fadeIn 0.25s ease-out;
+}
+
+@keyframes ytrag-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ytrag-message-user {
+  align-self: flex-end;
+  background: var(--ytrag-accent-gradient);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.ytrag-message-assistant {
+  align-self: flex-start;
+  background: var(--ytrag-bg-card);
+  border: 1px solid var(--ytrag-border);
+  color: var(--ytrag-text-primary);
+  border-bottom-left-radius: 4px;
+  backdrop-filter: blur(8px);
+}
+
+.ytrag-message-assistant:hover {
+  border-color: var(--ytrag-border-hover);
+}
+
+/* ── Sources Block inside messages ── */
+.ytrag-sources {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(6, 182, 212, 0.06);
+  border: 1px solid rgba(6, 182, 212, 0.18);
+  border-radius: var(--ytrag-radius-sm);
+  font-size: 0.76rem;
+}
+
+.ytrag-sources-title {
+  font-weight: 600;
+  color: var(--ytrag-text-secondary);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ytrag-source-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  color: var(--ytrag-accent-secondary) !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.ytrag-source-link:hover {
+  color: #22d3ee !important;
+  text-decoration: underline !important;
+}
+
+.ytrag-source-link .ytrag-play-icon {
+  font-size: 0.7rem;
+}
+
+/* ── Typing Indicator ── */
+.ytrag-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  align-self: flex-start;
+  background: var(--ytrag-bg-card);
+  border: 1px solid var(--ytrag-border);
+  border-radius: var(--ytrag-radius-md);
+  border-bottom-left-radius: 4px;
+}
+
+.ytrag-typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ytrag-accent-primary);
+  animation: ytrag-bounce 1.4s infinite ease-in-out;
+}
+
+.ytrag-typing-dot:nth-child(1) { animation-delay: 0s; }
+.ytrag-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.ytrag-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes ytrag-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── Chat Input Area ── */
+#ytrag-input-area {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--ytrag-border);
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+#ytrag-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ytrag-border);
+  border-radius: var(--ytrag-radius-md);
+  padding: 4px 4px 4px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#ytrag-input-wrapper:focus-within {
+  border-color: var(--ytrag-accent-primary);
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.18);
+}
+
+#ytrag-chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--ytrag-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.84rem;
+  padding: 8px 0;
+  min-width: 0;
+}
+
+#ytrag-chat-input::placeholder {
+  color: var(--ytrag-text-muted);
+}
+
+#ytrag-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ytrag-radius-sm);
+  background: var(--ytrag-accent-gradient);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+#ytrag-send-btn:hover {
+  opacity: 0.88;
+  transform: scale(1.04);
+}
+
+#ytrag-send-btn:active {
+  transform: scale(0.96);
+}
+
+#ytrag-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Welcome State ── */
+.ytrag-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  flex: 1;
+}
+
+.ytrag-welcome-icon {
+  font-size: 2.8rem;
+  margin-bottom: 14px;
+  animation: ytrag-float 3s ease-in-out infinite;
+}
+
+@keyframes ytrag-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.ytrag-welcome h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ytrag-text-primary);
+  margin: 0 0 8px;
+}
+
+.ytrag-welcome p {
+  font-size: 0.8rem;
+  color: var(--ytrag-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Error State ── */
+.ytrag-error-msg {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--ytrag-radius-sm);
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: var(--ytrag-error);
+  margin: 6px 0;
+}
+
+/* ── Progress bar ── */
+.ytrag-progress {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.ytrag-progress-bar {
+  height: 100%;
+  background: var(--ytrag-accent-gradient);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  animation: ytrag-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes ytrag-shimmer {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* ── Markdown in messages ── */
+.ytrag-message-assistant strong {
+  color: var(--ytrag-text-primary);
+  font-weight: 600;
+}
+
+.ytrag-message-assistant em {
+  color: var(--ytrag-text-secondary);
+}
+
+.ytrag-message-assistant ul,
+.ytrag-message-assistant ol {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+
+.ytrag-message-assistant li {
+  margin-bottom: 3px;
+}
+
+.ytrag-message-assistant code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* ── Footer ── */
+#ytrag-footer {
+  padding: 8px 18px;
+  text-align: center;
+  border-top: 1px solid var(--ytrag-border);
+  flex-shrink: 0;
+}
+
+#ytrag-footer p {
+  font-size: 0.65rem;
+  color: var(--ytrag-text-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
+}

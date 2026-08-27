@@ -1,0 +1,16 @@
+{
+  "pythonVersion": "3.12",
+  "venvPath": ".",
+  "venv": "venv",
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "reportGeneralTypeIssues": "none",
+  "reportOptionalMemberAccess": "none",
+  "reportAttributeAccessIssue": "none",
+  "exclude": [
+    "venv/**",
+    "**/__pycache__/**"
+  ]
+}
